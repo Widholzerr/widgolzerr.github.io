@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contrato de Namoro</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            margin: 40px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            text-align: justify;
+        }
+        .contrato {
+            max-width: 800px;
+            background: white;
+            padding: 30px;
+            border: 2px solid black;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+            margin: auto;
+        }
+        h1, h2 {
+            text-align: center;
+            text-transform: uppercase;
+            text-decoration: underline;
+        }
+        p {
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        .assinaturas {
+            margin-top: 50px;
+            text-align: center;
+            display: flex;
+            justify-content: space-between; /* Alinha as caixas de assinatura lado a lado */
+        }
+        .assinatura-box {
+            width: 40%;
+            text-align: center;
+        }
+        .assinatura-nome {
+            font-family: 'Dancing Script', cursive;
+            font-size: 24px;
+            font-weight: bold;
+            display: block;
+            margin-bottom: -10px; /* Faz o nome ficar bem acima da linha */
+        }
+        .linha-assinatura {
+            border-top: 1px solid black;
+            width: 100%;
+            display: block;
+            margin-top: 20px;
+        }
+        .assinatura-texto {
+            font-size: 14px;
+            display: block;
+            margin-top: 5px;
+            font-style: italic;
+        }
+        #adicionar-nome {
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        #gerar-pdf {
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin-top: 30px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        #gerar-pdf:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <audio id="musica" autoplay loop>
+        <source src="./Audio/Muse - Supermassive Black Hole [Official Music Video] [Xsp3_a-PMTw].mp3" type="audio/mpeg">
+    </audio>
+    
+<div class="contrato" id="contrato">
+    <h1>Contrato de Namoro</h1>
+    <p><strong>CONTRATANTES:</strong></p>
+    <p>Eu, <strong>Pedro Costa Widholzer</strong>, e <strong><span id="nome-parceiro">Anie Julie e Silva Rodrigues</span></strong>, doravante denominados "casal apaixonado", resolvemos celebrar este contrato de namoro, estabelecendo cláusulas essenciais para o nosso relacionamento.</p>
+
+    <h2>Cláusulas do Contrato</h2>
+    
+    <p><strong>Cláusula 1 - Da Exclusividade:</strong> Ambas as partes concordam que este namoro é exclusivo e que fidelidade é um requisito fundamental.</p>
+
+    <p><strong>Cláusula 2 - Da Demonstração de Afeto:</strong> O casal compromete-se a demonstrar carinho através de abraços, beijos e declarações diárias de amor.</p>
+
+    <p><strong>Cláusula 3 - Das Datas Especiais:</strong> Aniversários, dia dos namorados e outras datas importantes jamais poderão ser esquecidas.</p>
+
+    <p><strong>Cláusula 4 - Do Perdão:</strong> Pequenos erros serão perdoados com base no amor e no diálogo, desde que não envolvam traição ou desrespeito.</p>
+
+    <p><strong>Cláusula 5 - Das Responsabilidades:</strong> Ambos os parceiros comprometem-se a apoiar e respeitar um ao outro em todas as situações, compartilhando alegrias e desafios.</p>
+
+    <h2>Disposições Finais</h2>
+    
+    <p>O presente contrato entra em vigor a partir da assinatura das partes e será válido enquanto houver amor, carinho e respeito mútuo.</p>
+
+    <div class="assinaturas">
+        <div class="assinatura-box">
+            <span class="assinatura-nome">Pedro Costa Widholzer</span>
+            <span class="linha-assinatura"></span>
+            <span class="assinatura-texto">[Assinatura de Pedro Costa Widholzer]</span>
+        </div>
+        <div class="assinatura-box">
+            <span class="assinatura-nome" id="nome-assinatura-parceiro"></span> <!-- Inicialmente vazio -->
+            <span class="linha-assinatura"></span>
+            <span class="assinatura-texto">[Assinatura de Anie Julie e Silva Rodrigues]</span>
+            <button id="adicionar-nome">Adicionar Nome</button> <!-- Botão de adicionar nome -->
+        </div>
+    </div>
+
+    <p style="text-align: center; margin-top: 20px;">
+        <em>Feito com amor, na data de <span style="text-decoration: underline;">18/04/2025</span>.</em>
+    </p>
+    
+    <!-- Botão para gerar o PDF -->
+    <button id="gerar-pdf">Gerar PDF</button>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+<script>
+    const musica = document.getElementById("musica");
+
+    // Retomar a música a partir do tempo salvo no localStorage, se existir
+    window.addEventListener('load', function() {
+    const tempoSalvo = localStorage.getItem('tempoMusica');
+        if (tempoSalvo) {
+                musica.currentTime = tempoSalvo; // Retoma de onde parou
+        }
+    });
+    document.getElementById("adicionar-nome").addEventListener("click", function() {
+        // Adiciona o nome de Anie na assinatura
+        document.getElementById("nome-assinatura-parceiro").innerText = "Anie Julie e Silva Rodrigues";
+    });
+
+    // Função para gerar o PDF
+    document.getElementById("gerar-pdf").addEventListener("click", function() {
+        const contrato = document.getElementById('contrato');
+        
+        // Ocultar os botões antes de gerar o PDF
+        document.getElementById("adicionar-nome").style.display = "none";
+        document.getElementById("gerar-pdf").style.display = "none";
+
+        // Usando html2pdf para gerar o PDF
+        html2pdf()
+            .from(contrato)
+            .save('contrato_de_namoro.pdf')
+            .then(function() {
+                // Restaurar os botões após a geração do PDF
+                document.getElementById("adicionar-nome").style.display = "block";
+                document.getElementById("gerar-pdf").style.display = "block";
+            });
+    });
+</script>
+
+</body>
+</html>
